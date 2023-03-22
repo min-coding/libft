@@ -6,7 +6,7 @@
 /*   By: ntraithi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:06:31 by ntraithi          #+#    #+#             */
-/*   Updated: 2023/03/19 15:36:49 by ntraithi         ###   ########.fr       */
+/*   Updated: 2023/03/23 01:08:38 by ntraithi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,44 @@
 #include <stdio.h>
 #include <string.h>
 
-size_t ft_strlcpy(char * dst, const char * src, size_t dstsize)
+size_t ft_strlcpy(char *dst, const char *src, size_t dsize)
 {
-  //copy src to dest and add \0 to the end
-  size_t i;
-  i = 0;
+  const char *osrc = src;
+  size_t nleft = dsize;
 
-  //check 1.if we exceed the buffer size 2.how many char we want to copy (dstsize)
-  while (i < sizeof(dst) - 1 && i < dstsize - 1)
+  /* Copy as many bytes as will fit. */
+  if (nleft != 0)
   {
-    dst[i] = src[i];
-    i++;
+    // Decrement the number of bytes left to copy. First one already decrement for NULL terminator
+    nleft--;
+    while (nleft != 0)
+    {
+      // Copy the current character from the source to the destination,
+      // and check if the copied is the null terminator character
+      
+      if ((*dst++ = *src++) == '\0')
+      {
+        // If it is, break out of the loop
+        break;
+      }
+      nleft--;
+    }
   }
-  dst[i] = '\0';
 
-  // return length of source
-  return ft_strlen(src);
+  if (nleft == 0)
+  {
+    //if  the given length are more than the src to copy. Null terminate dst.
+    if (dsize != 0)
+    {
+      *dst = '\0';
+    }
+
+    //keep  moving src to the last letter
+    while (*src++);
+    
+  }
+  // last letter of src - first letter of src - 1 = src length
+  return (src - osrc - 1);
 }
 
 // int main()
