@@ -14,48 +14,35 @@
 #include <stdio.h>
 #include <string.h>
 
-//string search in string
+//needle search in len of haystack
 
 char *ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-  // needle index
-  int k;
-
-  // haystack index
-  size_t j;
-
-  j = 0;
-  k = 0;
-
-  if (needle[k] == '\0')
-  {
-    return (char *)haystack;
-  }
-
-  while (j < len)
-  {
-    /* code */
-    while (needle[k] != '\0')
-    {
-      /* code */
-      if (needle[k] == haystack[j])
-      {
-        k++;
-      }
-      else
-      {
-        k = 0;
-      }
-      break;
+    if (!*needle) {
+        return (char *)haystack;
     }
 
-    if (needle[k] == '\0')
-    {
-      return (char *)needle;
+    if (len == 0) {
+        return NULL;
     }
-    j++;
-  }
-  return 0;
+
+    while (*haystack && len > 0) {
+        const char *haystack_tmp = haystack;
+        const char *needle_tmp = needle;
+        size_t matched_len = 0;
+
+        while (haystack_tmp[matched_len] == needle_tmp[matched_len] && (matched_len < len)) {
+            matched_len++;
+
+            if (!needle_tmp[matched_len]) {
+                return (char *)haystack;
+            }
+        }
+        haystack++;
+        len--;
+    }
+
+    return NULL;
 }
 
 // int main()

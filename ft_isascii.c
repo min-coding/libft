@@ -6,7 +6,7 @@
 /*   By: ntraithi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 20:26:30 by ntraithi          #+#    #+#             */
-/*   Updated: 2023/03/21 17:15:35 by ntraithi         ###   ########.fr       */
+/*   Updated: 2023/03/17 18:28:44 by ntraithi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,11 @@
 
 int ft_isascii(int c)
 {
-    return (c >= 000 && c <= 177);
+    return (c >= 0 && c <= 127);
 }
 
-
+// int main()
+// {
+//   printf("%d is the result\n", ft_isascii('Z'));
+//   printf("%d is the result\n", ft_isascii('漢'));
+// }

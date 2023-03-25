@@ -31,7 +31,7 @@ const char *ft_strrchr(const char *s, int c)
 
   i = ft_strlen(s) - 1;
 
-  while (i > 0)
+  while (i >= 0)
   {
     if ((char)c == s[i])
     {
@@ -39,6 +39,11 @@ const char *ft_strrchr(const char *s, int c)
     }
     i--;
   }
+  if(!c)
+  {
+    return s;
+  }
+
   return 0;
 }
 
@@ -46,7 +51,7 @@ const char *ft_strrchr(const char *s, int c)
 // {
 
 //   // creating some string
-//   char str[] = "GeeksforGeeks";
+//   char str[] = "";
 //   const char *ptr;
 
 //   // The character to be searched

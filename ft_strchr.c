@@ -6,7 +6,7 @@
 /*   By: ntraithi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 17:17:49 by ntraithi          #+#    #+#             */
-/*   Updated: 2023/03/22 00:17:49 by ntraithi         ###   ########.fr       */
+/*   Updated: 2023/03/18 16:54:38 by ntraithi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,6 @@ const char *ft_strchr(const char *s, int c)
 
   i = 0;
 
-  if(!ft_isascii(c))
-    return s;
-
-  if (!ft_isalnum(c))
-  {
-    return s + ft_strlen(s);
-  }
-
   while (s[i] != '\0')
   {
     if((char)c == s[i])
@@ -49,6 +41,11 @@ const char *ft_strchr(const char *s, int c)
     }
     i++;
   }
+  
+  if (!c) {
+    return s + i;
+  }
+
   return 0;
 }
 
@@ -56,5 +53,6 @@ const char *ft_strchr(const char *s, int c)
 // {
 //   char str[] = "Hello, world!";
 //   const char *ptr = ft_strchr(str, 0);
+//   printf("The first occurrence of 'e' in '%s' is at position %ld.\n", str, ptr - str);
 //   return 0;
 // }

@@ -6,7 +6,7 @@
 /*   By: ntraithi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 00:40:46 by ntraithi          #+#    #+#             */
-/*   Updated: 2023/03/22 17:55:06 by ntraithi         ###   ########.fr       */
+/*   Updated: 2023/03/21 00:40:55 by ntraithi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,56 +15,54 @@
 #include "libft.h"
 #include <string.h>
 
-/* only work if
-1. set is on either end with \0
-2. set is on both end
-
-This case doesn't match both conditions.
-
-ft_strtrim("   xxxtripouille   xxx abc", " x"); 
-*/
-
 char *ft_strtrim(char const *s1, char const *set)
 {
-  char *str;
-  int j = 0;
+    char *str;
+    int i;
+    int j;
+    int k;
+    int s1len;
 
-  if (!s1 || !set)
-  {
-    return NULL;
-  }
+    s1len = ft_strlen(s1);
+    //set
+    i = 0;
 
-  // skip the match characters in the front. Keep skipping until we find the unmatch
-  while (s1[j] != '\0' && ft_strchr(set, s1[j]) != NULL)
-  {
-    j++;
-  }
-  int s1len = ft_strlen(s1);
+    //s1
+    j= 0;
 
-  // skip the match characters from the back. Running it back if the string search is true, until we find the unmatch 
-  while (s1len > j && ft_strchr(set, s1[s1len - 1]) != NULL)
-  {
-    s1len--;
-  }
+    //for remove
+    k = 0;
 
-  // total length - letters matched = trimmed 
-  str = malloc((s1len - j + 1) * sizeof(*s1));
-  if (!str)
-  {
-    return NULL;
-  }
+    if(!s1 || !set)
+    {
+        return NULL;
+    }
 
-  //src start from s1,skipped all the matches.size exclude all the match
-  ft_memcpy(str, s1 + j, s1len - j);
-  str[s1len - j] = '\0';
 
-  return str;
+    while(set[i] != '\0'){
+        j = 0;
+        while(s1[j] != '\0'){
+            //if the letter in set,match the letter in j
+            if (s1[j] == set[i]) {
+                //moving 1 block fwd, from 1 block behind, for the rest of the string after
+                //if the size gets smaller because first 2 blocks will overlap.
+                // ft_memmove((char *)(s1+j),(s1+j+1),(s1len-j));
+                k = 0;
+                while(k < s1len){
+                    /* code */
+                    s1 = &s1[k + 1];
+                    k++;
+                }
+                s1len--;
+                str = malloc((s1len+1)*sizeof(*s1));
+                if(!str)
+                {
+                    return NULL;
+                }
+            }
+            j++;
+        }
+        i++;
+    }
+    return str;
 }
-
-// int main(){
-//   char *str = "   xxxtripouille   xxx abc";
-//   char *result1;
-//   result1 = ft_strtrim(str, " x");
-//   printf("Result : %s\n", result1);
-//   printf("You see it still returns xxx\n");
-// }
