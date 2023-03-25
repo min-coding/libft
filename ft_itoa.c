@@ -6,15 +6,11 @@
 /*   By: ntraithi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:29:52 by ntraithi          #+#    #+#             */
-/*   Updated: 2023/03/23 16:20:25 by ntraithi         ###   ########.fr       */
+/*   Updated: 2023/03/23 23:18:12 by ntraithi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
-#include <limits.h>
-#include <string.h>
-
 #include <stdio.h>
 #include <limits.h>
 #include <string.h>
