@@ -15,64 +15,78 @@
 #include <limits.h>
 #include <string.h>
 
-char *ft_itoa(int n)
+//checking how many digits there are
+static size_t	count_digits(int n)
 {
-  char *result;
-  int temp;
-  int len;
+	size_t	i;
 
-  temp = n;
+	i = 1;
 
-  if (n < 0 || n == INT_MIN)
-  {
-    temp = n * -1;
-  }
+  	while (n /=10)
+		i++;
 
-  len = 1;
+  // n = n/10;
+	// while (n)
+  // {
+	// 	i++;
+  //   n = n/10;
+  // }
+  
+	return (i);
+}
 
-  // create a loop to check digit
-  while (temp / 10 >= 1)
-  {
-    /* code */
-    temp = temp / 10;
-    len++;
-  }
+char			*ft_itoa(int n)
+{
+	char		*str_num;
+	size_t		digits;
+  //long int to handle intmax,min
+	long int	num;
 
-  int sum;
-  if (n < 0)
-  {
-    result = malloc(sizeof(*result) * (len + 2));
-    result[0] = '-';
-    result[len + 1] = '\0';
-    sum = len;
-  }
-  else
-  {
-    result = malloc(sizeof(*result) * (len + 1));
-    result[len] = '\0';
-    sum = len - 1;
-  }
+	num = n;
+	digits = count_digits(n);
 
-  while (temp % 10 >= 0 && len >= 1)
-  {
-    /* code */
-    result[sum] = abs(n) % 10 + '0';
-    len--;
-    sum--;
-    n = n / 10;
-  };
+  //if n is negative, make it positive
+	if (n < 0)
+	{
+		num *= -1;
+    //added 1 digit because of '-' sign
+		digits++;
+	}
+	if (!(str_num = (char *)malloc(sizeof(char) * (digits + 1))))
+		return (NULL);
 
-  return result;
+  //set last char to Null
+	*(str_num + digits) = '\0';
+
+  //adding number backwards, stops when digits = 0
+  // for
+	while (digits--)
+	{
+		*(str_num + digits) = num % 10 + '0';
+		num = num / 10;
+	}
+  // digits--;
+  // while (digits)
+	// {
+	// 	*(str_num + digits) = num % 10 + '0';
+	// 	num = num / 10;
+  //   digits--;
+	// }
+
+//if it's a negative number, the digits is already allocated 1 more than the positive. Since we filled the number backwards, the remaining space will be the first index (for neg)
+	if (n < 0)
+		*(str_num + 0) = '-';
+	return (str_num);
 }
 
 // int main()
 // {
 // //   char *str = ft_itoa(0);
 // //   char *str = ft_itoa(-1);
-// // char *str = ft_itoa(-2147483647);
-//   char *str = ft_itoa(INT_MIN);
-//   //   char *str = ft_itoa(1234);
-//   //   char *str = ft_itoa(-1234);
+// char *str = ft_itoa(-2147483648);
+//   // char *str = ft_itoa(INT_MIN);
+//     // char *str = ft_itoa(1234);
+//     // char *str = ft_itoa(-1234);
 //   printf("%s\n", str);
 
 //   free(str);

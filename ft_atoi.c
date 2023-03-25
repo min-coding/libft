@@ -30,18 +30,19 @@ int ft_atoi(const char *str)
   result = 0;
 
 //if the letter is alpha, space, tab -> skip it
-  while (str[i] == ' ' || str[i] == 0 || str[i] == '\t' || (str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z') || ((str[i] >= 9 && str[i] <=13)))
+  while (str[i] == ' ' || str[i] == 0 || str[i] == '\t' || ((str[i] >= 9 && str[i] <=13)))
     i++;
 
-//if it's there's a pos,neg sign, multiply with `sign`
-
+//only move i if there's a sign
   if (str[i] == '-')
   {
       sign *= -1;
-  }
-  
-  //if it's positive or negative move
       i++;
+  }
+  else if(str[i] == '+')
+  {
+    i++; 
+  }
 
 //if there's another one after it 
   if (str[i] == '-' || str[i] == '+')
@@ -59,6 +60,13 @@ int ft_atoi(const char *str)
 }
 
 // int main(){
+//   //1
 //   printf("%d\n",ft_atoi("\n\v\f\r 1"));
+//   //1
+//   printf("%d\n",ft_atoi("1"));
+//   //101
+//   printf("%d\n",ft_atoi("+101"));
 //   return 0;
 // }
+
+//1,10,16

@@ -17,52 +17,36 @@
 
 char *ft_strtrim(char const *s1, char const *set)
 {
-    char *str;
-    int i;
-    int j;
-    int k;
-    int s1len;
+  char *str;
+  int j = 0;
 
-    s1len = ft_strlen(s1);
-    //set
-    i = 0;
+  if (!s1 || !set)
+  {
+    return NULL;
+  }
 
-    //s1
-    j= 0;
+  // skip the match characters in the front. Keep skipping until we find the unmatch
+  while (s1[j] != '\0' && ft_strchr(set, s1[j]) != NULL)
+  {
+    j++;
+  }
+  int s1len = ft_strlen(s1);
 
-    //for remove
-    k = 0;
+  // skip the match characters from the back. Running it back if the string search is true, until we find the unmatch 
+  while (s1len > j && ft_strchr(set, s1[s1len - 1]) != NULL)
+  {
+    s1len--;
+  }
+  // total length - letters matched = trimmed 
+  str = malloc((s1len - j + 1) * sizeof(*s1));
+  if (!str)
+  {
+    return NULL;
+  }
 
-    if(!s1 || !set)
-    {
-        return NULL;
-    }
+  //src start from s1,skipped all the matches.size exclude all the match
+  ft_memcpy(str, s1 + j, s1len - j);
+  str[s1len - j] = '\0';
 
-
-    while(set[i] != '\0'){
-        j = 0;
-        while(s1[j] != '\0'){
-            //if the letter in set,match the letter in j
-            if (s1[j] == set[i]) {
-                //moving 1 block fwd, from 1 block behind, for the rest of the string after
-                //if the size gets smaller because first 2 blocks will overlap.
-                // ft_memmove((char *)(s1+j),(s1+j+1),(s1len-j));
-                k = 0;
-                while(k < s1len){
-                    /* code */
-                    s1 = &s1[k + 1];
-                    k++;
-                }
-                s1len--;
-                str = malloc((s1len+1)*sizeof(*s1));
-                if(!str)
-                {
-                    return NULL;
-                }
-            }
-            j++;
-        }
-        i++;
-    }
-    return str;
+  return str;
 }

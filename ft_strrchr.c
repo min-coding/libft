@@ -30,7 +30,6 @@ const char *ft_strrchr(const char *s, int c)
   int i;
 
   i = ft_strlen(s) - 1;
-
   while (i >= 0)
   {
     if ((char)c == s[i])
@@ -39,6 +38,12 @@ const char *ft_strrchr(const char *s, int c)
     }
     i--;
   }
+
+  if(c == 0)
+  {
+    return s+ft_strlen(s);
+  }
+
   if(!c)
   {
     return s;

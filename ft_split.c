@@ -15,93 +15,132 @@
 #include <string.h>
 #include "libft.h"
 
-char **ft_split(char const *s, char c)
+
+/*
+count number of words in s.
+
+1. check only the FIRST letter of the word. By saying if s[i] != delim, then it's a start of a word. 
+
+2. when you get the FIRST letter of the nth word, loop until s[i] == c again
+
+*/
+static int	ft_count_word(char const *s, char c)
 {
-  int i = 0;
-  int match = 0;
-  int numStr = 0;
-  char **arr = NULL;
-  char *start = NULL;
-  char *end = NULL;
+	int i;
+	int word;
 
-  // Go through the string to count the number of words
-  while (s[i] != '\0')
-  {
-    if (s[i] == c)
-    {
-      match++;
-    }
-    i++;
-  }
-
-  // Allocate memory for the array of strings by maximum possible number of words
-  arr = malloc(sizeof(char *) * (match + 1));
-
-  if (!arr)
-  {
-    return NULL;
-  }
-
-  i = 0;
-  match = 0;
-
-  // Go through the string again to split it into words
-  while (s[i] != '\0')
-  {
-    // If a delimiter is found, set the end pointer
-    if (s[i] == c)
-    {
-      end = (char *)(s + i);
-    }
-    // If a word is found
-    else if (end && (s[i + 1] == c || s[i + 1] == '\0'))
-    {
-      // Set the start pointer, which is 1 step after the delimiter which we had set to `end`
-      start = end + 1;
-
-      // Allocate memory for the word and copy it
-      // i is the end of the word, end is the last index before the word start and s is the start of the string.So (end -s ) is esentially deleting spaces that delimiters take. Finally,  i - delimiter space = word length
-     
-      arr[numStr] = malloc(sizeof(char) * (i - (end - s) + 1));
-      if (!arr[numStr])
-      {
-        return NULL;
-      }
-      ft_strlcpy(arr[numStr], start, i - (end - s) + 1);
-
-      arr[numStr][i - (end - s)] = '\0';
-      numStr++;
-
-      // Reset the start and end pointers
-      start = NULL;
-      end = NULL;
-    }
-
-    i++;
-  }
-
-  // Set the last element of the array to NULL to mark the end
-  arr[numStr] = NULL;
-
-  return arr;
+	i = 0;
+	word = 0;
+	while (s && s[i])
+	{
+		if (s[i] != c)
+		{
+			word++;
+			while (s[i] != c && s[i])
+				i++;
+		}
+		else
+			i++;
+	}
+	return (word);
 }
 
-int main()
+/*
+checking number of character in a word by
+1. if s[i] isn't a delim, and s[i] is valid. (then it's some letter),
+	count it
+*/
+
+static int	ft_size_word(char const *s, char c, int i)
 {
-  char **str;
-  str = ft_split("  tripouille  42  ", ' ');
+	int	size;
 
-  for (int i = 0; str[i] != NULL; i++)
-  {
-    printf("%s\n", str[i]);
-  }
-
-  // Free the memory allocated for the array and its elements
-  for (int i = 0; str[i] != NULL; i++)
-  {
-    free(str[i]);
-  }
-  free(str);
-
-  return 0;
+	size = 0;
+	while (s[i] != c && s[i])
+	{
+		size++;
+		i++;
+	}
+	return (size);
 }
+
+
+static void	ft_free(char **arr, int j)
+{
+	while (j > 0)
+	{
+		free(arr[j]);
+		j--;
+	}
+		
+	free(arr);
+}
+
+char		**ft_split(char const *s, char c)
+{
+	int		i;
+	int		word;
+	char	**arr;
+	int		size;
+	int		j;
+
+	i = 0;
+	j = 0;
+
+	//find out how many word to allocate the arr
+	word = ft_count_word(s, c);
+
+	//allocate arr of word with number of words * size of each word (string)
+	arr = (char **)malloc((word + 1) * sizeof(char *));
+
+	if (!arr)
+		return (NULL);
+
+	// counting word
+	while (j < word)
+	{
+		//skip if it's a delim
+		while (s[i] == c)
+			i++;
+		//if it's a letter, find the size of a word
+		size = ft_size_word(s, c, i);
+
+		//assign a substring to arr. 
+		arr[j] = ft_substr(s, i, size);
+
+		// if it's null, then free the allocated space for the word, letter by letter
+		if (!(arr[j]))
+		{
+			ft_free(arr, j);
+			return (NULL);
+		}
+
+		// skip the whole word, we continue on the end of the word
+		i += size;
+		j++;
+	}
+	arr[j] = 0;
+	return (arr);
+}
+
+
+// int main()
+// {
+//   char **str;
+// //   str = ft_split("  tripouille  42  ", ' ');
+//   str = ft_split("tripouille", 0);
+
+//   for (int i = 0; str[i] != NULL; i++)
+//   {
+//     printf("%s\n", str[i]);
+//   }
+
+//   // Free the memory allocated for the array and its elements
+//   for (int i = 0; str[i] != NULL; i++)
+//   {
+//     free(str[i]);
+//   }
+//   free(str);
+
+//   return 0;
+// }

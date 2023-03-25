@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_putend1_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntraithi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/15 14:38:45 by ntraithi          #+#    #+#             */
-/*   Updated: 2023/03/19 14:00:13 by ntraithi         ###   ########.fr       */
+/*   Created: 2023/03/23 22:31:18 by ntraithi          #+#    #+#             */
+/*   Updated: 2023/03/23 23:16:35 by ntraithi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <stdio.h>
 #include "libft.h"
+#include <limits.h>
 
-int ft_strlen(const char *str)
+void ft_putendl_fd(char *s,int fd)
 {
-
   int i;
-
   i = 0;
-  while (str[i] != '\0')
+  // char *nl = NULL;
+  // *nl = '\n';
+
+  while (s[i] != '\0')
   {
+    write(fd, (s + i), 1);
     i++;
   }
-  return (i);
+  write(fd, "\n", 1);
 }
 
 // int main(){
-//   printf("The length is %d\n", ft_strlen("1234"));
-//   printf("The length is %d\n", ft_strlen("FOUR"));
+//   // ft_putend1_fd("Hello", 1);
+//   ft_putend1_fd((char *)"42", 1);
+//   return 0;
 // }

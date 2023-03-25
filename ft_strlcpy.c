@@ -14,29 +14,43 @@
 #include <stdio.h>
 #include <string.h>
 
-size_t ft_strlcpy(char * dst, const char * src, size_t dstsize)
+size_t ft_strlcpy(char *dst, const char *src, size_t dsize)
 {
-  //copy src to dest and add \0 to the end
+  const char *osrc = src;
+  size_t nleft = dsize;
 
-  size_t i;
-  i = 0;
-
-  size_t srclen; 
-  srclen = ft_strlen(src);
-
-  if(dstsize <= 0)
-    return srclen;
-
-  //1.if we exceed the buffer size 2.how many char we want to copy (dstsize)
-  while (i < sizeof(dst) - 1 && i < dstsize - 1)
+  /* Copy as many bytes as will fit. */
+  if (nleft != 0)
   {
-    dst[i] = src[i];
-    i++;
+    // Decrement the number of bytes left to copy. First one already decrement for NULL terminator
+    nleft--;
+    while (nleft != 0)
+    {
+      // Copy the current character from the source to the destination,
+      // and check if the copied is the null terminator character
+      if ((*dst++ = *src++) == '\0')
+      {
+        // If it is, break out of the loop
+        break;
+      }
+      nleft--;
+    }
   }
-  dst[i] = '\0';
 
-  // return length of source
-  return srclen;
+  if (nleft == 0)
+  {
+    //if  the given length are more than the src to copy. Null terminate dst.
+    if (dsize != 0)
+    {
+      *dst = '\0';
+    }
+
+    //keep  moving src to the last letter
+    while (*src++);
+
+  }
+  // last letter of src - first letter of src - 1 = src length
+  return (src - osrc - 1);
 }
 
 
