@@ -1,38 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntraithi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/24 15:32:30 by ntraithi          #+#    #+#             */
-/*   Updated: 2023/03/24 16:22:17 by ntraithi         ###   ########.fr       */
+/*   Created: 2023/03/26 15:53:47 by ntraithi          #+#    #+#             */
+/*   Updated: 2023/03/26 15:53:48 by ntraithi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "libft.h"
-#include <stdio.h>
 #include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-t_list *ft_lstnew(void *content)
+void ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-  t_list *node;
-  node = malloc(sizeof(*node));
+    if (!lst || !del)
+        return;
 
-  if(!node)
-  {
-    return NULL;
-  }
-  node->content = content;
-  node->next = NULL;
+    del(lst->content);
+    
+	//if lst has only 1 node
+    if (lst->next == NULL)
+    {
+        free(lst);
+        lst = NULL;
+    }
 
-  return node;
+	//if lst has more than 1 node. 
+    else
+    {
+        lst->content = lst->next->content;
+        lst->next = lst->next->next;
+    }
 }
-
-/*
-typedef struct s_list
-{
-    void *content;
-    struct s_list *next;
-}               t_list;
-*/

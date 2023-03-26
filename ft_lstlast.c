@@ -1,38 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntraithi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/24 15:32:30 by ntraithi          #+#    #+#             */
-/*   Updated: 2023/03/24 16:22:17 by ntraithi         ###   ########.fr       */
+/*   Created: 2023/03/26 13:53:58 by ntraithi          #+#    #+#             */
+/*   Updated: 2023/03/26 13:53:59 by ntraithi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
 
-t_list *ft_lstnew(void *content)
+t_list *ft_lstlast(t_list *lst)
 {
-  t_list *node;
-  node = malloc(sizeof(*node));
+	//receive pointer to head node 
+	//if there's no node, return NULL
+    if (!lst)
+		return (NULL);
 
-  if(!node)
-  {
-    return NULL;
-  }
-  node->content = content;
-  node->next = NULL;
+	//if there's an address in the first node, make lst point to the node.next of the latter node until lst->next is NULL
+	while (lst->next)
+		lst = lst->next;
 
-  return node;
+	return (lst);
 }
-
-/*
-typedef struct s_list
-{
-    void *content;
-    struct s_list *next;
-}               t_list;
-*/

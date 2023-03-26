@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntraithi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/24 16:45:47 by ntraithi          #+#    #+#             */
-/*   Updated: 2023/03/24 19:09:45 by ntraithi         ###   ########.fr       */
+/*   Created: 2023/03/26 14:10:15 by ntraithi          #+#    #+#             */
+/*   Updated: 2023/03/26 14:10:17 by ntraithi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <unistd.h>
+#include <stdlib.h>
 #include <stdio.h>
 
-void ft_lstadd_front(t_list **lst,t_list *new)
+void ft_lstadd_back(t_list **lst,t_list *new)
 //**lst is a pointer to head node
 {
-  //from new->next = NULL, to new->next=head node (*lst)
-  new->next = *lst;
+    //create pointer to point to last node	
+	t_list *last;
 
-  //update head pointer.pointer to head now point to new(address) of new node
-  *lst = new;
+    //last node address to `last` pointer
+	last = ft_lstlast(*lst);
+
+    //if last node address is not NULL, change the it's address to the new added node address
+	if (last)
+		last->next = new;
+		
+    //if there's no last node, which means there's only 1 node, then just set the new head to new
+	else
+		*lst = new;
 }
