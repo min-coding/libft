@@ -13,23 +13,9 @@
 #include <stdio.h>
 #include "libft.h"
 
-int ft_toupper(int c)
+int	ft_toupper(int c)
 {
-  if(c >= 'a' && c <= 'z')
-  {
-    return (c - 32);
-  }
-  else
-  {
-    return c;
-  }
+	if (c >= 'a' && c <= 'z')
+		return (c - 32);
+	return (c);
 }
-
-// int main()
-// {
-//   printf("%c is returned\n", ft_toupper((unsigned char)'y'));
-//   printf("%c is returned\n", ft_toupper((unsigned char)'T'));
-//   printf("%c is returned\n", ft_toupper((unsigned char)'0'));
-//   printf("%c is returned\n", ft_toupper((unsigned char)'$'));
-//   return (0);
-// }

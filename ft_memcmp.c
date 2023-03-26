@@ -14,26 +14,31 @@
 #include <stdio.h>
 #include <unistd.h>
 
-int ft_memcmp(const void *s1, const void *s2, size_t n)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-  const unsigned char *p1 = s1;
-  const unsigned char *p2 = s2;
+	const unsigned char	*p1;
+	const unsigned char	*p2;
+	size_t				i;
 
-  for (size_t i = 0; i < n; i++)
-  {
-    if (p1[i] != p2[i])
-    {
-      return p1[i] - p2[i];
-    }
-  }
-  return 0;
+	p1 = s1;
+	p2 = s2;
+	i = 0;
+	while (i < n)
+	{
+		if (p1[i] != p2[i])
+		{
+			return (p1[i] - p2[i]);
+		}
+	i++;
+	}
+	return (0);
 }
 
 
 // int main() {
 //     char s[] = {-128, 0, 127, 0};
 //     char sCpy[] = {-128, 0, 127, 0};
-  
+
 //   printf("%d",ft_memcmp(s, sCpy, 4));
 //   return 0;
 // }

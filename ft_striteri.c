@@ -13,27 +13,14 @@
 #include "libft.h"
 #include "stdio.h"
 
-void ft_striteri(char *s,void (*f)(unsigned int,char*))
+void	ft_striteri(char *s,void (*f)(unsigned int,char*))
 {
-  int i;
-  i = 0;
+	int	i;
 
-  while (s[i] != '\0')
-  {
-    f(i, s + i);
-    i++;
-  }
+	i = 0;
+	while (s[i] != '\0')
+	{
+		f(i, s + i);
+		i++;
+	}
 }
-
-void my_func2(unsigned int i, char *s)
-{
-  printf("Letter: %c\n is from index %d",*s,i);
-}
-
-// int main()
-// {
-//   char str[10] = "hello";
-//   ft_striteri(str, my_func2);
-//   // printf("The result is %s\n", result);
-//   return 0;
-// }

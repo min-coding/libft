@@ -14,12 +14,8 @@
 #include <unistd.h>
 #include <stdio.h>
 
-void ft_lstadd_front(t_list **lst,t_list *new)
-//**lst is a pointer to head node
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-  //from new->next = NULL, to new->next=head node (*lst)
-  new->next = *lst;
-
-  //update head pointer.pointer to head now point to new(address) of new node
-  *lst = new;
+	new->next = *lst;
+	*lst = new;
 }

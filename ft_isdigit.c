@@ -14,13 +14,7 @@
 #include <stdio.h>
 #include "libft.h"
 
-int ft_isdigit(int c)
+int	ft_isdigit(int c)
 {
-  return (c >= '0' && c <= '9');
+	return (c >= '0' && c <= '9');
 }
-
-// int main()
-// {
-//   printf("The Result : %d\n", ft_isdigit('0'));
-//   printf("The Result : %d\n", ft_isdigit('B'));
-// }

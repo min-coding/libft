@@ -13,29 +13,17 @@
 #include <stdio.h>
 #include "libft.h"
 
-void *ft_memset(void *str, int c, size_t len)
+void	*ft_memset(void *str, int c, size_t len)
 {
-  unsigned char *buf = (unsigned char *)str;
+	unsigned char	*buf;
+	size_t			i;
 
-  size_t i;
-  i = 0;
-  while (i < len)
-  {
-    buf[i] = (unsigned char)c;
-    i++;
-  }
-  return str;
+	buf = (unsigned char *)str;
+	i = 0;
+	while (i < len)
+	{
+		buf[i] = (unsigned char)c;
+		i++;
+	}
+	return (str);
 }
-
-// int main()
-// {
-//   char arr[30] = "Hellooooooooooo Worrrrrllld";
-
-//   ft_memset(arr, '$', 7);
-//   for (size_t i = 0; i < sizeof(arr); ++i)
-//   {
-//     printf("%c", arr[i]);
-//   }
-
-//   return (0);
-// }

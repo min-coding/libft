@@ -14,16 +14,11 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-t_list *ft_lstlast(t_list *lst)
+t_list	*ft_lstlast(t_list *lst)
 {
-	//receive pointer to head node 
-	//if there's no node, return NULL
-    if (!lst)
+	if (!lst)
 		return (NULL);
-
-	//if there's an address in the first node, make lst point to the node.next of the latter node until lst->next is NULL
 	while (lst->next)
 		lst = lst->next;
-
 	return (lst);
 }

@@ -14,29 +14,16 @@
 #include "libft.h"
 #include <string.h>
 
-void ft_bzero(void *s, size_t n)
+void	ft_bzero(void *s, size_t n)
 {
-  char *buf = (char *)s;
+	char	*buf;
+	size_t	i;
 
-  size_t i;
-  i = 0;
-  while (i < n)
-  {
-    buf[i] = 0;
-    i++;
-  }
+	buf = (char *)s;
+	i = 0;
+	while (i < n)
+	{
+		buf[i] = 0;
+		i++;
+	}
 }
-
-// int main()
-// {
-//   char arr[30];
-//   memset(arr,'A',30);
-
-//   ft_bzero(arr,12);
-//   for (size_t i = 0; i < sizeof(arr); ++i)
-//   {
-//     printf("%c", arr[i]);
-//   }
-
-//     return (0);
-// }

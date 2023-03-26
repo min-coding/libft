@@ -14,25 +14,16 @@
 #include <stdio.h>
 #include <unistd.h>
 
-t_list *ft_lstnew(void *content)
+t_list	*ft_lstnew(void *content)
 {
-  t_list *node;
-  node = malloc(sizeof(*node));
+	t_list	*node;
 
-  if(!node)
-  {
-    return NULL;
-  }
-  node->content = content;
-  node->next = NULL;
-
-  return node;
+	node = malloc(sizeof(*node));
+	if (!node)
+	{
+		return (NULL);
+	}
+	node->content = content;
+	node->next = NULL;
+	return (node);
 }
-
-/*
-typedef struct s_list
-{
-    void *content;
-    struct s_list *next;
-}               t_list;
-*/

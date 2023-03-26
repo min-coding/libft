@@ -14,29 +14,28 @@
 #include <string.h>
 #include "libft.h"
 
-void *ft_memmove(void *dst, const void *src, size_t len)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-  //src < dst and overlap. we copy back to front
-  size_t i;
-  if((const char *)src < (char *)dst && (const char *)src + len > (char *)dst)
-  {
-    i = len;
-    while (i > 0)
-    {
-      i--;
-      ((char *)dst)[i] = ((const char *)src)[i];
-    }
-  }
-  // dst < src and overlap. we copy front to back
-  else if ((char *)dst < (const char *)src && (char *)dst + len > (const char *)src)
-  {    
-    ft_memcpy(dst, src, len);
-  }
-  else
-  {
-    ft_memcpy(dst, src, len);
-  }
-  return dst;
+	size_t	i;
+
+	if ((const char *)src < (char *)dst && (const char *)src + len > (char *)dst)
+	{
+	i = len;
+		while (i > 0)
+		{
+	i--;
+	((char *)dst)[i] = ((const char *)src)[i];
+		}
+	}
+	else if ((char *)dst < (const char *)src && (char *)dst + len > (const char *)src)
+	{
+		ft_memcpy(dst, src, len);
+	}
+	else
+	{
+		ft_memcpy(dst, src, len);
+	}
+	return (dst);
 }
 
 // int main()

@@ -17,24 +17,19 @@
 #include <stdlib.h>
 #include <string.h>
 
-void ft_lstdelone(t_list *lst, void (*del)(void *))
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-    if (!lst || !del)
-        return;
-
-    del(lst->content);
-    
-	//if lst has only 1 node
-    if (lst->next == NULL)
-    {
-        free(lst);
-        lst = NULL;
-    }
-
-	//if lst has more than 1 node. 
-    else
-    {
-        lst->content = lst->next->content;
-        lst->next = lst->next->next;
-    }
+	if (!lst || !del)
+		return ;
+	del(lst->content);
+	if (lst->next == NULL)
+	{
+		free(lst);
+		lst = NULL;
+	}
+	else
+	{
+		lst->content = lst->next->content;
+		lst->next = lst->next->next;
+	}
 }

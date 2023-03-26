@@ -14,20 +14,14 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void ft_lstadd_back(t_list **lst,t_list *new)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 //**lst is a pointer to head node
 {
-    //create pointer to point to last node	
-	t_list *last;
+	t_list	*last;
 
-    //last node address to `last` pointer
 	last = ft_lstlast(*lst);
-
-    //if last node address is not NULL, change the it's address to the new added node address
 	if (last)
 		last->next = new;
-		
-    //if there's no last node, which means there's only 1 node, then just set the new head to new
 	else
 		*lst = new;
 }

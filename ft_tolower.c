@@ -13,24 +13,9 @@
 #include <stdio.h>
 #include "libft.h"
 
-int ft_tolower(int c)
+int	ft_tolower(int c)
 {
-  if(c >= 'A' && c <= 'Z')
-  {
-    return (c + 32);
-  }
-  else
-  {
-    return (c);
-  }
+	if (c >= 'A' && c <= 'Z')
+		return (c + 32);
+	return (c);
 }
-
-// int main()
-// {
-//   printf("%c is returned\n", ft_tolower((unsigned char)'y'));
-//   printf("%c is returned\n", ft_tolower((unsigned char)'T'));
-//   printf("%c is returned\n", ft_tolower((unsigned char)'A'));
-//   printf("%c is returned\n", ft_tolower((unsigned char)'0'));
-//   printf("%c is returned\n", ft_tolower((unsigned char)'$'));
-//   return (0);
-// }

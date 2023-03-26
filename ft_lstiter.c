@@ -14,25 +14,17 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-void ft_lstiter(t_list *lst, void (*f)(void *))
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-    //lst id a pointer to a node,starting from the first
+	t_list	*current;
+	t_list	*next;
 
-    //pointer current is pointing to the first node
-    t_list *current = lst;
-
-    //pointer next 
-    t_list *next;
-
-    while(current){
-        //next is pointing to first node next.
-        next = current->next;
-        //apply function f on content of each node
-        f(current->content);
-        current = next;
-    }
-
-    //pointer lst is now pointing to the last node
-    lst = NULL;
+	current = lst;
+	while (current)
+	{
+	next = current->next;
+		f(current->content);
+	current = next;
+	}
+	lst = NULL;
 }
-

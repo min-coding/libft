@@ -14,25 +14,17 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-
-int ft_lstsize(t_list *lst)
+int	ft_lstsize(t_list *lst)
 {
-    int i;
-    i = 0;
+	int	i;
 
-    if(lst == 0)
-        return 0;
-
-    while(lst != NULL){
-        i++;
-        lst = lst->next;
-    }
-    return i;
+	i = 0;
+	if (lst == 0)
+		return (0);
+	while (lst != NULL)
+	{
+		i++;
+		lst = lst->next;
+	}
+	return (i);
 }
-/*
-typedef struct s_list
-{
-    void *content;
-    struct s_list *next;
-}               t_list;
-*/

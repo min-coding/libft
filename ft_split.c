@@ -15,19 +15,10 @@
 #include <string.h>
 #include "libft.h"
 
-
-/*
-count number of words in s.
-
-1. check only the FIRST letter of the word. By saying if s[i] != delim, then it's a start of a word. 
-
-2. when you get the FIRST letter of the nth word, loop until s[i] == c again
-
-*/
 static int	ft_count_word(char const *s, char c)
 {
-	int i;
-	int word;
+	int	i;
+	int	word;
 
 	i = 0;
 	word = 0;
@@ -72,75 +63,33 @@ static void	ft_free(char **arr, int j)
 		free(arr[j]);
 		j--;
 	}
-		
 	free(arr);
 }
 
-char		**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	int		i;
-	int		word;
 	char	**arr;
 	int		size;
 	int		j;
 
 	i = 0;
 	j = 0;
-
-	//find out how many word to allocate the arr
-	word = ft_count_word(s, c);
-
-	//allocate arr of word with number of words * size of each word (string)
-	arr = (char **)malloc((word + 1) * sizeof(char *));
-
-	if (!arr)
-		return (NULL);
-
-	// counting word
-	while (j < word)
+	arr = (char **)malloc((ft_count_word(s, c) + 1) * sizeof(char *));
+	while (j < ft_count_word(s, c))
 	{
-		//skip if it's a delim
 		while (s[i] == c)
 			i++;
-		//if it's a letter, find the size of a word
 		size = ft_size_word(s, c, i);
-
-		//assign a substring to arr. 
 		arr[j] = ft_substr(s, i, size);
-
-		// if it's null, then free the allocated space for the word, letter by letter
 		if (!(arr[j]))
 		{
 			ft_free(arr, j);
 			return (NULL);
 		}
-
-		// skip the whole word, we continue on the end of the word
 		i += size;
 		j++;
 	}
 	arr[j] = 0;
 	return (arr);
 }
-
-
-// int main()
-// {
-//   char **str;
-// //   str = ft_split("  tripouille  42  ", ' ');
-//   str = ft_split("tripouille", 0);
-
-//   for (int i = 0; str[i] != NULL; i++)
-//   {
-//     printf("%s\n", str[i]);
-//   }
-
-//   // Free the memory allocated for the array and its elements
-//   for (int i = 0; str[i] != NULL; i++)
-//   {
-//     free(str[i]);
-//   }
-//   free(str);
-
-//   return 0;
-// }

@@ -27,32 +27,22 @@ The strchr() function locates the first occurrence of c (converted to a
      character, or NULL if the character does not appear in the string.
 */
 
-const char *ft_strchr(const char *s, int c)
-{ 
-  int i;
+const	char	*ft_strchr(const char *s, int c)
+{
+	int	i;
 
-  i = 0;
-
-  while (s[i] != '\0')
-  {
-    if((char)c == s[i])
-    {
-      return s + i;
-    }
+	i = 0;
+	while (s[i] != '\0')
+	{
+		if ((char)c == s[i])
+		{
+			return (s + i);
+		}
     i++;
-  }
-  
-  if (!c) {
-    return s + i;
-  }
-
-  return 0;
+	}
+	if (!c)
+	{
+		return (s + i);
+	}
+	return (0);
 }
-
-// int main()
-// {
-//   char str[] = "Hello, world!";
-//   const char *ptr = ft_strchr(str, 0);
-//   printf("The first occurrence of 'e' in '%s' is at position %ld.\n", str, ptr - str);
-//   return 0;
-// }

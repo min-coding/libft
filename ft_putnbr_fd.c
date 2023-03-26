@@ -15,7 +15,7 @@
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	unsigned int nbr;
+	unsigned int	nbr;
 
 	if (n < 0)
 	{
@@ -24,17 +24,7 @@ void	ft_putnbr_fd(int n, int fd)
 	}
 	else
 		nbr = n;
-
-  //keeps looping until find a base case (nbr <= 9)
 	if (nbr > 9)
 		ft_putnbr_fd(nbr / 10, fd);
-
-  //Base case. + '0' to turn it into char.
 	ft_putchar_fd(nbr % 10 + '0', fd);
 }
-
-// int main(){
-//   ft_putnbr_fd(-42, 1);
-//   // ft_putnbr_fd(0, 1);
-//   return 0;
-// }
