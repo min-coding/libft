@@ -10,86 +10,87 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
 #include "libft.h"
 
-static int	ft_count_word(char const *s, char c)
+static int	ft_countword(char const *s, char c)
 {
 	int	i;
-	int	word;
+	int	cw;
 
 	i = 0;
-	word = 0;
-	while (s && s[i])
+	cw = 0;
+	while (s[i])
 	{
-		if (s[i] != c)
-		{
-			word++;
-			while (s[i] != c && s[i])
-				i++;
-		}
-		else
+		while (s[i] && s[i] == c)
 			i++;
+		while (s[i] && s[i] != c)
+		{
+			i++;
+			if (s[i] == c || s[i] == '\0')
+				cw++;
+		}
 	}
+	return (cw);
+}
+
+static char	*ft_malloc_word(const char *str, char c, int *start)
+{
+	char	*word;
+	int		i;
+	int		len;
+
+	len = 0;
+	i = 0;
+	while (str[*start] == c)
+		*start += 1;
+	while (str[*start + len] != c && str[*start + len] != '\0')
+		len++;
+	word = malloc(sizeof(char) * (len + 1));
+	if (!word)
+		return (NULL);
+	while (i < len)
+	{
+		word[i] = str[*start + i];
+		i++;
+	}
+	*start += len;
+	word[i] = '\0';
 	return (word);
 }
 
-/*
-checking number of character in a word by
-1. if s[i] isn't a delim, and s[i] is valid. (then it's some letter),
-	count it
-*/
-
-static int	ft_size_word(char const *s, char c, int i)
+static char	**ft_freeword(char **split, int i)
 {
-	int	size;
-
-	size = 0;
-	while (s[i] != c && s[i])
+	while (i >= 0)
 	{
-		size++;
-		i++;
+		free(split[i]);
+		i--;
 	}
-	return (size);
-}
-
-
-static void	ft_free(char **arr, int j)
-{
-	while (j > 0)
-	{
-		free(arr[j]);
-		j--;
-	}
-	free(arr);
+	free(split);
+	return (NULL);
 }
 
 char	**ft_split(char const *s, char c)
 {
+	char	**split;
+	int		cw;
 	int		i;
-	char	**arr;
-	int		size;
-	int		j;
+	int		start;
 
 	i = 0;
-	j = 0;
-	arr = (char **)malloc((ft_count_word(s, c) + 1) * sizeof(char *));
-	while (j < ft_count_word(s, c))
+	start = 0;
+	if (!s)
+		return (NULL);
+	cw = ft_countword(s, c);
+	split = (char **)malloc(sizeof(char *) * (cw + 1));
+	if (!split)
+		return (NULL);
+	while (i < cw)
 	{
-		while (s[i] == c)
-			i++;
-		size = ft_size_word(s, c, i);
-		arr[j] = ft_substr(s, i, size);
-		if (!(arr[j]))
-		{
-			ft_free(arr, j);
-			return (NULL);
-		}
-		i += size;
-		j++;
+		split[i] = ft_malloc_word(s, c, &start);
+		if (!split[i])
+			return (ft_freeword(split, i));
+		i++;
 	}
-	arr[j] = 0;
-	return (arr);
+	split[i] = NULL;
+	return (split);
 }

@@ -11,18 +11,19 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 #include <limits.h>
-#include <string.h>
 
-//checking how many digits there are
 static size_t	count_digits(int n)
 {
 	size_t	i;
 
 	i = 1;
-	while (n /= 10)
+	n = n / 10;
+	while (n)
+	{
 		i++;
+		n = n / 10;
+	}
 	return (i);
 }
 
@@ -39,7 +40,8 @@ char	*ft_itoa(int n)
 		num *= -1;
 		digits++;
 	}
-	if (!(str_num = (char *)malloc(sizeof(char) * (digits + 1))))
+	str_num = (char *)malloc(sizeof(char) * (digits + 1));
+	if (!str_num)
 		return (NULL);
 	*(str_num + digits) = '\0';
 	while (digits--)

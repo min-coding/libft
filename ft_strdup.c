@@ -10,25 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
 #include "libft.h"
-#include <errno.h>
-#include <string.h>
 
 char	*ft_strdup(const char *s1)
 {
-	int		strlen1;
+	int		lenstr;
 	char	*ptr;
 
-	strlen1 = ft_strlen(s1);
-	ptr = ft_calloc(strlen1 + 1, sizeof(*ptr));
+	lenstr = ft_strlen(s1);
+	ptr = ft_calloc(lenstr + 1, sizeof(*ptr));
 	if (!ptr)
-	{
-	errno = ENOMEM;
 		return (0);
-	}
-	ft_memcpy(ptr, s1, strlen1);
-	ptr[strlen1] = '\0';
+	ft_memcpy(ptr, s1, lenstr);
+	ptr[lenstr] = '\0';
 	return (ptr);
 }

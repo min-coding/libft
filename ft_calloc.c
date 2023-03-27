@@ -10,11 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
 #include "libft.h"
-#include <errno.h>
-#include <string.h>
+#include <limits.h>
 
 void	*ft_calloc(size_t count, size_t size)
 {
@@ -22,17 +19,12 @@ void	*ft_calloc(size_t count, size_t size)
 	size_t	i;
 
 	i = 0;
-	if (count == SIZE_MAX || size == SIZE_MAX)
-	{
-	errno = ENOMEM;
+	if (count >= SIZE_MAX || size >= SIZE_MAX)
 		return (NULL);
-	}
 	ptr = (int *)malloc(count * size);
 	if (!ptr)
-	{
-	errno = ENOMEM;
 		return (0);
-	}
+	i = 0;
 	ft_bzero(ptr, count * size);
 	return (ptr);
 }

@@ -10,17 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
 #include "libft.h"
 
 int	ft_isprint(int c)
 {
 	return (c >= 32 && c <= 126);
 }
-
-// int main()
-// {
-//   printf("%d is the result\n", ft_isprint('!'));
-//   printf("%d is the result\n", ft_isprint('漢'));
-// }

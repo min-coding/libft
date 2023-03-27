@@ -11,11 +11,8 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
-#include <stdio.h>
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
-//**lst is a pointer to head node
 {
 	t_list	*last;
 
